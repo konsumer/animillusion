@@ -32,7 +32,7 @@
 var images = ["cat/tmp-0.gif","cat/tmp-1.gif","cat/tmp-2.gif","cat/tmp-3.gif","cat/tmp-4.gif","cat/tmp-5.gif","cat/tmp-6.gif","cat/tmp-7.gif"];
 
 // size of slit in paper, in pixels
-frameWidth = 3;
+slitSize = 1;
 
 
 
@@ -47,7 +47,7 @@ function dl(a){
 	}
 	var d=cv.toDataURL("image/png");
 	var w=window.open('about:blank','image from canvas');
-	w.document.write("<img src='"+d+"' alt='from canvas'/>");
+	w.document.write("<img src='" + d + "' alt='from canvas'/>");
 }
 
 
@@ -68,12 +68,12 @@ window.onload = function(){
 	}
 
 	loadImages(images, function(images){
-		
+		images.sort(function(a,b){ if (a.src < b.src){ return -1; }else if (a.src > b.src){ return 1; } else { return 0; } });
+
 		c.width = images[0].width;
 		c.height = images[0].height;
 		document.body.appendChild(c);
 		var ctx=c.getContext("2d");
-
 		
 		c2.width = images[0].width;
 		c2.height = images[0].height;
@@ -85,29 +85,15 @@ window.onload = function(){
 			c2.style.left = e.x-(c2.width/2);
 		};
 
-		images.sort(function(a,b){ if (a.src < b.src){ return -1; }else if (a.src > b.src){ return 1; } else { return 0; } });
-
-		var sourceX=0;
-
 		// draw illusion
-		images.forEach(function(img, i){
-			for (x=0;x<c.width;x+=(images.length*frameWidth)+i){
-				ctx.drawImage(img, x, 0, frameWidth, c.height, x, 0, frameWidth, c.height);
-			}
-		});
-
-/*
-		i=0;
-		setInterval(function(){
-			i++;
-			ctx.drawImage(images[i % images.length], 0, 0, c.width, c.height, 0, 0, c.width, c.height);
-		},200);
-*/
+		for (x=0;x<c.width;x+=images.length){
+			images.forEach(function(img, i){
+				ctx.drawImage(img, x+i, 0, slitSize , c.height, x+i, 0, slitSize , c.height);
+			});
+		}
 
 		// draw stripes
-		
-
-		for (x=0;x<=c.width;x+=images.length+frameWidth ){
+		for (x=0;x<c.width;x+=images.length+slitSize ){
 			ctx2.fillRect (x,0,images.length,c.height);
 		}
 	})
