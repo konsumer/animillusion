@@ -85,16 +85,11 @@ window.onload = function(){
 			c2.style.left = e.x-(c2.width/2);
 		};
 
-		// draw illusion
 		for (x=0;x<c.width;x+=images.length){
 			images.forEach(function(img, i){
 				ctx.drawImage(img, x+i, 0, slitSize , c.height, x+i, 0, slitSize , c.height);
 			});
-		}
-
-		// draw stripes
-		for (x=0;x<c.width;x+=images.length+slitSize ){
-			ctx2.fillRect (x,0,images.length,c.height);
+			ctx2.fillRect (x,0,images.length-1,c.height);
 		}
 	})
 
