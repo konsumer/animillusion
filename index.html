@@ -11,17 +11,32 @@
 		position:absolute;
 		left:0;
 	}
+
+	ul {
+		padding:0;
+		margin:0;
+	}
+
+	li {
+		list-style:none;
+		display:inline-block;
+		margin-right: 10px;
+	}
+	img {
+		width: 100px;
+	}
 </style>
 </head>
 <body>
-<ul>
-<li><a href="javascript:dl('image')" id="lImage">image</a></li>
-<li><a href="javascript:dl('screen')" id="lScreen">screen</a></li>
-</ul>
-
-<canvas id="cImage"></canvas>
-<canvas id="cScreen"></canvas>
-
+	<ul>
+		<li><a href="javascript:dl('image')" id="lImage">image</a></li>
+		<li><a href="javascript:dl('screen')" id="lScreen">screen</a></li>
+	</ul>
+	<div>
+		<div id="images"></div>
+	</div>
+	<canvas id="cImage"></canvas>
+	<canvas id="cScreen"></canvas>
 </body>
 
 <script>
@@ -47,9 +62,7 @@ function dl(a){
 	w.document.write("<img src='" + d + "' alt='from canvas'/>");
 }
 
-
-
-window.onload = function(){
+function updateAll(){
 	function loadImages(ims, cb){
 		var images=[];
 		ims.forEach(function(i,x){
@@ -65,7 +78,11 @@ window.onload = function(){
 	}
 
 	loadImages(images, function(images){
-		images.sort(function(a,b){ if (a.src < b.src){ return -1; }else if (a.src > b.src){ return 1; } else { return 0; } });
+		var imgs=document.getElementById('images');
+		imgs.innerHTML="";
+		images.forEach(function(img){
+			imgs.appendChild(img);
+		});
 
 		c.width = images[0].width;
 		c.height = images[0].height;
@@ -88,7 +105,11 @@ window.onload = function(){
 			});
 			ctx2.fillRect (x,0,images.length-slitSize,c.height);
 		}
-	})
+	});
+}
 
+
+window.onload = function(){
+	updateAll();
 }
 </script>
