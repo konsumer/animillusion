@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title>Animated Illusion Maker</title>
+<style>
+	canvas {
+		margin: 10px;
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body></body>
+
+<script>
+window.onload = function(){
+	function loadImages(ims, cb){
+		var images=[];
+		ims.forEach(function(i,x){
+			var img = new Image();
+			img.onload = function() {
+				images.push(img);
+				if (x == ims.length-1){
+					cb(images);
+				}
+			}
+			img.src = i;
+		});
+	}
+
+
+	var images = ["cat/cat_01.png","cat/cat_02.gif","cat/cat_03.gif","cat/cat_04.gif","cat/cat_05.gif","cat/cat_06.gif","cat/cat_07.gif","cat/cat_08.gif","cat/cat_09.gif","cat/cat_10.gif","cat/cat_11.gif","cat/cat_12.gif","cat/cat_13.gif","cat/cat_14.gif","cat/cat_15.gif","cat/cat_16.gif","cat/cat_17.gif","cat/cat_18.gif","cat/cat_19.gif","cat/cat_20.png"];
+
+
+	loadImages(images, function(images){
+		images.sort(function(a,b){ if (a.src < b.src){ return -1; }else if (a.src > b.src){ return 1; } else { return 0; } });
+
+		var c = document.createElement('canvas');
+		c.width = images[0].width;
+		c.height = images[0].height;
+		document.body.appendChild(c);
+		var ctx=c.getContext("2d");
+
+		// show image
+		// ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+
+		// plain animation
+		/*
+		i=0;
+		setInterval(function(){
+			i++;
+			ctx.drawImage(images[i % images.length], 0, 0, c.width, c.height, 0, 0, c.width, c.height);
+		},200);
+		*/
+
+		// mash images
+		/*
+		images.forEach(function(img, i){
+			ctx.drawImage(img, i*(c.width/images.length), 0, c.width/images.length, c.height, i*(c.width/images.length), 0, c.width/images.length, c.height);
+		});
+	*/
+
+
+		var sourceX=0,
+			sourceY=0,
+			sourceWidth=5,
+			sourceHeight=c.height;
+
+		// draw illusion
+		images.forEach(function(img, i){
+			for (x=0;x<c.width;x+=images.length){
+				sourceX=i*(c.width/images.length)+x;
+				ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, sourceX, sourceY, sourceWidth, sourceHeight);
+			}
+		});
+
+		// draw stripes
+		var c2 = document.createElement('canvas');
+		c2.width = images[0].width;
+		c2.height = images[0].height;
+		document.body.appendChild(c2);
+		var ctx2=c2.getContext("2d");
+		ctx2.fillStyle = "#000";
+
+		for (x=0;x<=c.width;x+=(c.width/images.length)+sourceWidth){
+			ctx2.fillRect (x,0,c.width/images.length,c.height);
+		}
+
+	})
+
+}
+</script>
