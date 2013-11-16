@@ -34,9 +34,6 @@ var images = ["cat/tmp-0.gif","cat/tmp-1.gif","cat/tmp-2.gif","cat/tmp-3.gif","c
 // size of slit in paper, in pixels
 slitSize = 1;
 
-
-
-
 var c = document.getElementById('cImage');
 var c2 = document.getElementById('cScreen');
 
@@ -89,7 +86,7 @@ window.onload = function(){
 			images.forEach(function(img, i){
 				ctx.drawImage(img, x+i, 0, slitSize , c.height, x+i, 0, slitSize , c.height);
 			});
-			ctx2.fillRect (x,0,images.length-1,c.height);
+			ctx2.fillRect (x,0,images.length-slitSize,c.height);
 		}
 	})
 
