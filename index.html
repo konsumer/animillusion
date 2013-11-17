@@ -31,15 +31,26 @@
 </head>
 <body>
 	<h1>Animated Illusion Maker</h1>
-	<p>Choose multiple files for the frames, and the animation will be updated with whatever you selected. It tends to work well with less than 10 frames, but your animation may work with more, especially if you make it really big (in terms of pixels.) Sillouettes, especially in colors other than black work really well, even with many frames. Make sure all the frames are the same pixel size. Most browsers will allow you to simply drag &amp; drop to the file input. When you are satisfied with the animation, you can click the "image" and "screen" links, below. Print "screen" on transparency plastic, and "image" on paper.</p>
+	<p>When you are satisfied with the animation, you can click the "image" and "screen" links, below. Print "screen" on transparency plastic, and "image" on paper.</p>
 	<ul>
 		<li><a href="javascript:dl('image')" id="lImage">image</a></li>
 		<li><a href="javascript:dl('screen')" id="lScreen">screen</a></li>
 	</ul>
+
+	<h2>Load an animation</h2>
+	<ul>
+		<li><a href="javascript:ld('cat')">cat</a></li>
+		<li><a href="javascript:ld('steamboat')">steamboat willie</a></li>
+		<li><a href="javascript:ld('baby')">dancing baby</a></li>
+	</ul>
+	
+	<h2>Make your own animation</h2>
+	<p><p>Choose multiple files for the frames, and the animation will be updated with whatever you selected. It tends to work well with less than 10 frames, but your animation may work with more, especially if you make it really big (in terms of pixels.) Sillouettes, especially in colors other than black work really well, even with many frames. Make sure all the frames are the same pixel size. Most browsers will allow you to simply drag &amp; drop to the file input.</p>
 	<div>
 		<label for="files[]">Files:</label>
 		<input type="file" id="files" name="files[]" multiple />
 	</div>
+	
 	<div>
 		<output id="images"></output>
 	</div>
@@ -55,7 +66,46 @@
 // SETTINGS
 
 // your images, should all be same size
-var images = ["cat/tmp-0.gif","cat/tmp-1.gif","cat/tmp-2.gif","cat/tmp-3.gif","cat/tmp-4.gif","cat/tmp-5.gif","cat/tmp-6.gif","cat/tmp-7.gif"];
+var presets = {
+	'cat': [
+		"cat/tmp-0.gif",
+		"cat/tmp-1.gif",
+		"cat/tmp-2.gif",
+		"cat/tmp-3.gif",
+		"cat/tmp-4.gif",
+		"cat/tmp-5.gif",
+		"cat/tmp-6.gif",
+		"cat/tmp-7.gif"
+	],
+	'steamboat': [
+		"steamboat/steamboatwillie_15.gif",
+		"steamboat/steamboatwillie_16.gif",
+		"steamboat/steamboatwillie_17.gif",
+		"steamboat/steamboatwillie_18.gif",
+		"steamboat/steamboatwillie_19.gif",
+		"steamboat/steamboatwillie_20.gif",
+		"steamboat/steamboatwillie_21.gif"
+	],
+	'baby': [
+		"baby/0.gif",
+		"baby/1.gif",
+		"baby/2.gif",
+		"baby/3.gif",
+		"baby/4.gif",
+		"baby/5.gif",
+		"baby/6.gif",
+		"baby/7.gif",
+		"baby/8.gif",
+		"baby/9.gif",
+		"baby/10.gif",
+		"baby/11.gif",
+		"baby/12.gif",
+		"baby/13.gif"
+	]
+
+	};
+
+var images = presets['cat'];
 
 // size of slit in paper, in pixels
 slitSize = 1;
@@ -120,6 +170,11 @@ function dl(a){
 	var d=cv.toDataURL("image/png");
 	var w=window.open('about:blank');
 	w.document.write("<img src='" + d + "' alt='from canvas'/>");
+}
+
+function ld(a){
+	images = presets[a];
+	updateAll();
 }
 
 function updateAll(){
