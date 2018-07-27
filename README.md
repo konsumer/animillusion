@@ -12,7 +12,7 @@ It tends to work well with less than 10 frames, but your animation may work with
 
 You can also print the images on paper/plastic, and it works pretty well.
 
-If you'd like some nice animation examples, I put some [here](https://github.com/konsumer/animillusion/tree/master/demo/src/examples).
+If you'd like some nice animation examples, I put some [here](https://github.com/konsumer/animillusion/tree/master/demo/src/examples). Just drag the images on to the [demo](http://konsumer.github.io/animillusion/).
 
 ## installation
 
