@@ -1,0 +1,25 @@
+{
+  "name": "animillusion",
+  "version": "0.0.0",
+  "description": "Make printable linear zoetropes of animations with javascript",
+  "main": "index.js",
+  "scripts": {
+    "predeploy": "cd demo && npm run build",
+    "deploy": "gh-pages -d demo/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konsumer/animillusion.git"
+  },
+  "keywords": [],
+  "author": "David Konsumer <konsumer@jetboystudio.com> (http://konsumer.js.org/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/konsumer/animillusion/issues"
+  },
+  "homepage": "http://konsumer.github.io/animillusion/",
+  "devDependencies": {
+    "gh-pages": "^1.2.0"
+  },
+  "files": ["index.js"]
+}
