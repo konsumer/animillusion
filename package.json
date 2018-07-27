@@ -4,8 +4,10 @@
   "description": "Make printable linear zoetropes of animations with javascript",
   "main": "index.js",
   "scripts": {
-    "predeploy": "cd demo && npm run build",
-    "deploy": "gh-pages -d demo/build"
+    "predeploy": "npm run build && cd demo && npm run build",
+    "deploy": "gh-pages -d demo/build",
+    "postbuild": "uglifyjs index.js > demo/public/animillusion.min.js",
+    "build": "babel ./animillusion.js > index.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,21 @@
   },
   "homepage": "http://konsumer.github.io/animillusion/",
   "devDependencies": {
-    "gh-pages": "^1.2.0"
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "gh-pages": "^1.2.0",
+    "uglify-js": "^3.4.5"
   },
-  "files": ["index.js"]
+  "files": [
+    "index.js"
+  ],
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-es2015-modules-umd"
+    ]
+  }
 }

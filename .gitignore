@@ -1,0 +1,5 @@
+*.log
+.DS_Store
+node_modules
+index.js
+demo/public/animillusion.min.js
