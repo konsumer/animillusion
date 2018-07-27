@@ -12,12 +12,19 @@ It tends to work well with less than 10 frames, but your animation may work with
 
 You can also print the images on paper/plastic, and it works pretty well.
 
+If you'd like some nice animation examples, I put some [here](https://github.com/konsumer/animillusion/tree/master/demo/src/examples).
+
 ## installation
 
 You can import/require it in webpack/browserify/etc:
 
 ```
 npm i animillusion
+```
+
+now you can do this:
+```js
+const animillusion = require('animillusion')
 ```
 
 or you can point to the js file in your HTML:
