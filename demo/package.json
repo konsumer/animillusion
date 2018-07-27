@@ -20,5 +20,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6"
-  }
+  },
+  "homepage": "http://konsumer.js.org/animillusion/"
 }
